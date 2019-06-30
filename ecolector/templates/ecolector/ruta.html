@@ -1,0 +1,187 @@
+{% extends "ecolector/base-dashboard.html" %}
+
+{% block body_block %}
+
+<!-- MAIN CONTENT-->
+<div class="main-content">
+    <div class="section__content section__content--p30">
+        <div class="container-fluid">
+
+                <!-- Google Maps API-->
+                <!--
+                <div class="row">
+                        <div class="col-lg-12">
+                            <h2 class="title-1 m-b-25">Ruta actual</h2>
+                            <div class="table-responsive table--no-card m-b-40">
+                                
+                                <div id="map"></div>
+                            </div>
+                        </div>
+                </div> 
+                -->
+
+                <div class="row">
+                        <div class="col-lg-12">
+                            <h2 class="title-1 m-b-25">Rutas disponibles</h2>
+                            <div class="table-responsive table--no-card m-b-40">
+                                <table class="table table-borderless table-striped table-earning">
+                                    <thead>
+                                        <tr>
+                                            <th></th>
+                                            <th>Fecha</th>
+                                            <th>Nombre de ruta</th>
+                                            <th class="text-right">Ganancia</th>
+                                            <th class="text-right">Ecolugares</th>
+                                            <th>Tiempo estimado</th>
+                                            <th class="text-right">Cubetas orgánicas</th>
+                                            <th class="text-right">Cubetas de plástico</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for route in routes_data %}
+                                        <tr>
+                                            <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#selectModal">
+                                                    Seleccionar
+                                                  </button></td>
+                                            <td>{{route.0}}</td>
+                                            <td>{{route.2}}</td>
+                                            <td class="text-right">${{route.3}}</td>
+                                            <td >{{route.4}}</td>
+                                            <td >{{route.4}} horas</td>
+                                            <td >{{route.4}}</td>
+                                            <td >{{route.4}}</td>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                </div>
+
+                <div class="row">
+                        <div class="col-lg-12">
+                            <h2 class="title-1 m-b-25">Rutas completadas</h2>
+                            <div class="table-responsive table--no-card m-b-40">
+                                <table class="table table-borderless table-striped table-earning">
+                                    <thead>
+                                        <tr>
+                                            <th>Fecha</th>
+                                            <th>Nombre de ruta</th>
+                                            <th class="text-right">Ganancia</th>
+                                            <th class="text-right">Ecolugares</th>
+                                            <th>Tiempo recorrido</th>
+                                            <th class="text-right">Kilos de basura orgánica</th>
+                                            <th class="text-right">Kilos de plástico</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for route in routes_data %}
+                                        <tr>
+                                            <td>{{route.0}}</td>
+                                            <td>{{route.2}}</td>
+                                            <td class="text-right">${{route.3}}</td>
+                                            <td >{{route.4}}</td>
+                                            <td >{{route.4}} horas</td>
+                                            <td >{{route.4}}</td>
+                                            <td >{{route.4}}</td>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                </div>
+            
+        </div>
+    </div>
+</div>
+
+<!-- Select Modal -->
+<div class="modal fade" id="selectModal" tabindex="-1" role="dialog" aria-labelledby="selectModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Confirmar acción</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            </div>
+            <div class="modal-body">
+            ¿Está seguro que desea seleccionar esta ruta?
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-success" onclick="select_route()">Aceptar</button>
+            <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+            </div>
+        </div>
+        </div>
+    </div>
+    <!-- END MAIN CONTENT-->
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script type="text/javascript" src="//cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <script type="text/javascript" src="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.js"></script>
+    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.css" />
+    
+    <script async defer
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAhne0xWYUgIKHNC6sxHHCXRrGPUFeGECk&callback=initMap">
+    </script>
+    <!-- Main JS-->
+    <!-- Google Map API section-->
+    <script>
+            var map, infoWindow, actual_route;
+            // Initialize and add the map
+            function initMap() {             
+                actual_route = {{ actual_route|safe }};
+                console.log(actual_route);
+                map = new google.maps.Map(document.getElementById('map'), {
+                center: {lat: -34.397, lng: 150.644},
+                zoom: 12
+                });
+                infoWindow = new google.maps.InfoWindow;
+
+                // Try HTML5 geolocation.
+                if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function(position) {
+                    let url = "http://maps.google.com/mapfiles/ms/icons/blue-dot.png";
+                    var pos = {
+                    lat: position.coords.latitude,
+                    lng: position.coords.longitude
+                    };
+
+                    infoWindow.open(map);
+                    map.setCenter(pos);
+                    // The marker, positioned at user points
+                    var marker = new google.maps.Marker({position: pos, map: map, icon: {url: url} });
+                    // Add the other positions
+                    for (var i=0;i<actual_route.length;i++){
+                        console.log(actual_route[i]);
+                        var pos = {
+                        lat: actual_route[i][0],
+                        lng: actual_route[i][1]
+                        };
+                        var marker = new google.maps.Marker({position: pos, map: map});
+                    }
+
+                }, function() {
+                    handleLocationError(true, infoWindow, map.getCenter());
+                });
+                } else {
+                // Browser doesn't support Geolocation
+                handleLocationError(false, infoWindow, map.getCenter());
+                }
+            }
+
+            function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+                infoWindow.setPosition(pos);
+                infoWindow.setContent(browserHasGeolocation ?
+                                    'Error: The Geolocation service failed.' :
+                                    'Error: Your browser doesn\'t support geolocation.');
+                infoWindow.open(map);
+            }
+            
+    </script>
+    
+
+{% endblock %}
+<!-- end document-->

@@ -1,0 +1,195 @@
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+{% extends "administration/base-dashboard-admin.html" %}
+
+{% block body_block %}
+
+<!-- MAIN CONTENT-->
+<div class="main-content">
+    <div class="section__content section__content--p30">
+        <div class="container-fluid">
+
+                <div class="row">
+                        <div class="col-lg-12">
+                            <h2 class="title-1 m-b-25">Rutas registrados</h2>
+                            <div class="table-responsive table--no-card m-b-40">
+                                <table class="table table-borderless table-striped table-earning">
+                                    <thead>
+                                        <tr>
+                                            <th></th>
+                                            <th>Tipo</th>
+                                            <th>País</th>
+                                            <th>Zona</th>
+                                            <th>Fraccionamiento</th>
+                                            <th>Subfraccionamientona</th>
+                                            <th class="text-right">Ganancia</th>
+                                            <th>Ecolugares</th>
+                                            <th>Tiempo estimado</th>
+                                            <th class="text-right">Cubetas de basura orgánica</th>
+                                            <th class="text-right">Cubetas de plástico</th>
+                                            <th class="text-right">Frecuencia</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for route in routes_data %}
+                                        <tr>
+                                            <td>
+                                                    <button type="button" class="btn btn-info" data-toggle="modal" data-target="#editModal"><i class="material-icons">edit</i></button>
+                                                    <button type="button" class="btn btn-info" data-toggle="modal" data-target="#deleteModal"><i class="material-icons">delete</i></button>
+                                                </td>
+                                            <td>A</td>    
+                                            <td>{{route.1}}</td>
+                                            <td class="text-right">{{route.2}}</td>
+                                            <td class="text-right">{{route.3}}</td>
+                                            <td class="text-right">{{route.4}}</td>
+                                            <td class="text-right">$ {{route.5}}</td>
+                                            <td class="text-right">{{route.6}}</td>
+                                            <td class="text-right">{{route.7}} horas</td>
+                                            <td class="text-right">{{route.8}}</td>
+                                            <td class="text-right">{{route.8}}</td>
+                                            <td class="text-right">2 veces a la semana</td>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                            <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#addModal">+ Agregar</button>
+                        </div>
+                </div>
+                     
+        </div>
+    </div>
+</div>
+
+<!-- Add Modal -->
+<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="addModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Confirmar acción</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        </div>
+        <div class="modal-body">
+            
+            <ul class="nav nav-tabs">
+                <li class="nav-item">
+                    <a class="nav-link active" href="#addRo" data-toggle="tab">Agregar ruta</a>
+                </li>
+            </ul>
+            
+            <div class="tab-content">
+                <div class="tab-pane active" id="addRo">
+                        <form role="form">
+                                <div class="form-group">
+                                    <label>Escribe el nombre de la ruta</label>
+                                    <input type="text" class="form-control" id="nameRoute" placeholder="Enter value" value="Valor">
+                                </div>
+                                <div class="form-group">
+                                  <label for="place">Lugares disponibles para agregar</label>
+                                        {% for place in available_routes %}
+                                        <br><input type="checkbox" name="{{place}}" value="{{place}}">{{place}}
+                                        {% endfor %}
+                                </div>
+                        </form>
+                </div>
+                 
+            </div>
+        
+            <button type="submit" class="btn btn-success pull-left" onclick="edit_place()">Aceptar</button>
+            <button type="submit" class="btn btn-danger pull-right" data-dismiss="modal">Cancelar</button>
+        </div>
+        
+        </div>
+    </div>
+    </div>
+</div>
+
+<!-- Edit Modal -->
+<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Datos de ruta</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+            <div class="modal-body">
+            
+                    <ul class="nav nav-tabs">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="#addRo" data-toggle="tab">Agregar lugar</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#delR" data-toggle="tab">Eliminar lugar</a>
+                        </li>
+                    </ul>
+                    
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="addRo">
+                                <form role="form">
+                                        <div class="form-group">
+                                          <label for="place">Lugares disponibles para agregar</label>
+                                                {% for place in available_routes %}
+                                                <br><input type="checkbox" name="{{place}}" value="{{place}}">{{place}}
+                                                {% endfor %}
+                                        </div>
+                                </form>
+                        </div>
+                         <div class="tab-pane" id="delR">
+                                <form role="form">
+                                        <div class="form-group">
+                                          <label for="place">Lugares de la ruta para eliminar</label>
+                                                {% for key, value1 in current_routes.items %}
+                                                    {% for value in value1 %}
+                                                    <br><input type="checkbox" name="{{value}}" value="{{value}}">{{value}}
+                                                    {% endfor %}
+                                                {% endfor %}
+                                        </div>
+                                </form>
+                        </div> 
+                    </div>
+                
+                    <button type="submit" class="btn btn-success pull-left" onclick="edit_place()">Aceptar</button>
+                    <button type="submit" class="btn btn-danger pull-right" data-dismiss="modal">Cancelar</button>
+                </div>
+        </div>
+    </div>
+</div>
+
+<!-- Delete Modal -->
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Confirmar acción</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            </div>
+            <div class="modal-body">
+            ¿Está seguro que desea eliminar esta ruta?
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-success" onclick="select_place()">Aceptar</button>
+            <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+            </div>
+        </div>
+        </div>
+    </div>
+    <!-- END MAIN CONTENT-->
+
+    <!-- Main JS-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+    <!-- Google Map API section-->
+    <script>
+            
+    </script>
+    
+
+{% endblock %}
+<!-- end document-->

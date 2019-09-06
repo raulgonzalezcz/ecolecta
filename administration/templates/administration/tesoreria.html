@@ -1,0 +1,126 @@
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+{% extends "administration/base-dashboard-admin.html" %}
+
+{% block body_block %}
+
+<!-- MAIN CONTENT-->
+<div class="main-content">
+    <div class="section__content section__content--p30">
+        <div class="container-fluid">
+
+                <h1 style="margin-bottom: 40px">Tesorería</h1>
+                <div class="row">
+                        <div class="col-lg-3">
+                                <div class="overview-item overview-item--c1">
+                                    <div class="overview__inner">
+                                        <div class="overview-box clearfix">
+                                            <div class="icon">
+                                                <i class="fa fa-money" aria-hidden="true"></i>
+                                            </div>
+                                            <div class="text">
+                                                <h2>Total por transferir: $2,500.65</h2>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                </div>
+
+                <div class="row">
+                        <div class="col-lg-12">
+                            <h2 class="title-1 m-b-25">Transferencias por realizar</h2>
+                            <div class="table-responsive table--no-card m-b-40">
+                                <table class="table table-borderless table-striped table-earning">
+                                    <thead>
+                                        <tr>
+                                            <th>Fecha</th>
+                                            <th>Nombre del ecolector</th>
+                                            <th>Factura en PDF</th>
+                                            <th>Factura en XML</th>
+                                            <th>Cantidad a pagar</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for transfer in current_transfers %}
+                                        <tr>   
+                                            <td>{{transfer.0}}</td>
+                                            <td>{{transfer.1}}</td>
+                                            <td class="text-right">{{transfer.2}}</td>
+                                            <td class="text-right">{{transfer.3}}</td>
+                                            <td class="text-right">$ {{transfer.4}}</td>
+                                            <td><button type="button" class="btn btn-info" data-toggle="modal" data-target="#payModal"><i class="material-icons">compare_arrows</i></button></td>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                </div>
+                     
+        </div>
+    </div>
+</div>
+
+<!-- Add Modal -->
+<div class="modal fade" id="payModal" tabindex="-1" role="dialog" aria-labelledby="payModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Confirmar acción</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        <div class="modal-body">
+            <form role="form">
+                    <h5 class="modal-title" id="exampleModalLabel" style="margin-bottom:15px">Datos bancarios</h5>
+                                <div class="form-group">
+                                    <label>Nombre de la persona</label>
+                                    <input type="text" class="form-control" id="nameRoute" placeholder="Enter value" value="Valor">
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Nombre del banco</label>
+                                    <input type="text" class="form-control" id="nameRoute" placeholder="Enter value" value="Valor">
+                                </div>
+
+                                <div class="form-group">
+                                    <label>CLABE</label>
+                                    <input type="text" class="form-control" id="nameRoute" placeholder="Enter value" value="Valor">
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Concepto</label>
+                                    <input type="text" class="form-control" id="nameRoute" placeholder="Enter value" value="Valor">
+                                </div>
+
+                                <div class="form-group">
+                                    <label>ID de transferencia</label>
+                                    <input type="text" class="form-control" id="nameRoute" placeholder="Enter value" value="Valor">
+                                </div>
+
+
+                                <button type="submit" class="btn btn-success pull-left" onclick="edit_place()">Aceptar</button>
+                                <button type="submit" class="btn btn-danger pull-right" data-dismiss="modal">Cancelar</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    <!-- END MAIN CONTENT-->
+
+    <!-- Main JS-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+    <!-- Google Map API section-->
+    <script>
+            
+    </script>
+    
+
+{% endblock %}
+<!-- end document-->

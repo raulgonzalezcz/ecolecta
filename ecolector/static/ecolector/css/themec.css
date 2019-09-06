@@ -98,15 +98,6 @@ p {
 }
 
 /* ----- Typography ----- */
-body {
-    font-family: "Poppins", sans-serif;
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 1.625;
-    color: #666;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-}
 
 h1,
 h2,
@@ -307,13 +298,12 @@ section {
 }
 
 .main-content {
-    padding-top: 116px;
     min-height: 100vh;
 }
 
 @media (max-width: 991px) {
     .main-content {
-        padding-top: 50px;
+        padding-top: 10px;
     }
 }
 
@@ -428,7 +418,7 @@ section {
 }
 
 .main-content--pb30 {
-    padding-bottom: 30px;
+    padding-bottom: 2px;
 }
 
 /*-----------------------------------------------------*/
@@ -793,6 +783,10 @@ section {
     -ms-transform: translate(-50%, -50%);
     -o-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
+}
+
+.au-input--xl {
+    min-width: 935px;
 }
 
 @media (max-width: 1600px) {
@@ -1277,12 +1271,13 @@ section {
     display: -webkit-flex;
     display: -moz-box;
     display: -ms-flexbox;
+    float: right;
     display: flex;
-    -webkit-box-align: center;
-    -webkit-align-items: center;
-    -moz-box-align: center;
-    -ms-flex-align: center;
-    align-items: center;
+    -webkit-box-align: right;
+    -webkit-align-items: right;
+    -moz-box-align: right;
+    -ms-flex-align: right;
+    align-items: right;
 }
 
 @media (max-width: 991px) {
@@ -1313,18 +1308,6 @@ section {
 
 .noti-wrap .noti__item:last-child {
     margin-right: 50px;
-}
-
-@media (max-width: 1200px) {
-    .noti-wrap .noti__item:last-child {
-        margin-right: 30px;
-    }
-}
-
-@media (max-width: 991px) {
-    .noti-wrap .noti__item:last-child {
-        margin-right: 0;
-    }
 }
 
 .noti__item {

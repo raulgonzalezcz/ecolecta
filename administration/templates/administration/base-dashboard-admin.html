@@ -105,16 +105,64 @@
                             <a class="js-arrow" href="{% url 'administration:rutas' %}">
                                 <i class="fa fa-road"></i>Rutas</a>
                         </li>
-                        <li onclick="getPaging(this.id)" id="lugar">
-                            <a href="{% url 'administration:lugar' %}">
-                                <i class="fa fa-map-marker"></i>Lugares</a>
+
+                        <li class="has-sub" onclick="getPaging(this.id)" id="catalogo">
+                            <a class="js-arrow dropdown-toggle" href="#" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                    <i class="fa fa-book"></i>Catálogo</a>
+                            </a>
+                            <ul class="navbar-mobile-sub__list list-unstyled js-sub-list">
+                                <li>
+                                    <a href="{% url 'administration:catalogo' %}">
+                                        <i class="fa fa-archive" aria-hidden="true"></i>Resumen
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{% url 'administration:lugar_domestico' %}">
+                                        <i class="fa fa-globe" aria-hidden="true"></i>País
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{% url 'administration:lugar_comercio' %}">
+                                        <i class="fa fa-cutlery" aria-hidden="true"></i>Zona
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{% url 'administration:lugar_domestico' %}">
+                                        <i class="fa fa-home" aria-hidden="true"></i>Fraccionamiento
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{% url 'administration:lugar_comercio' %}">
+                                        <i class="fa fa-building" aria-hidden="true"></i>Subfraccionamiento
+                                    </a>
+                                </li>
+                            </ul>
                         </li>
+
+                        <li class="has-sub" onclick="getPaging(this.id)" id="lugar">
+                            <a class="js-arrow dropdown-toggle" href="#" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                    <i class="fa fa-map-marker"></i>Lugares</a>
+                            </a>
+                            <ul class="navbar-mobile-sub__list list-unstyled js-sub-list">
+                                <li>
+                                    <a href="{% url 'administration:lugar_domestico' %}">
+                                        <i class="fa fa-home" aria-hidden="true"></i>Domésticos
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{% url 'administration:lugar_comercio' %}">
+                                        <i class="fa fa-cutlery" aria-hidden="true"></i>Restaurantes y comercios
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+
                         <li onclick="getPaging(this.id)" id="resumen">
                             <a href="{% url 'administration:index' %}">
                                 <i class="fa fa-tachometer"></i>Reportes</a>
                         </li>
                         <li onclick="getPaging(this.id)" id="ruta">
-                            <a href="{% url 'administration:rutas' %}">
+                            <a href="{% url 'administration:tesoreria' %}">
                                 <i class="fa fa-money"></i>Tesorería</a>
                         </li>
                         

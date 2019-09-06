@@ -23,21 +23,89 @@ def index(request):
     }
     return render(request, 'administration/index-admin.html', context)
 
-def show_lugar(request):
-    countries = {
-        0:"Mexico",
-        1:"Canada"
-    }
+def show_lugar_domestico(request):
+    countries = ["México"]
+    zones = ["Puebla","Oaxaca","CDMX"]
+    fracs = ["Angelópolis","Valle del Sol","Centro","Villa Frontera","CU"]
+    subfracs = ["Sección sur","Sección norte","Sección II"]
+    
+    #Sort data
+    countries.sort()
+    zones.sort()
+    fracs.sort()
+    subfracs.sort()
+
+    data_select = [countries,zones,fracs,subfracs]
+
     places_data_d = [[1515,"México","Puebla","Angelópolis", "Angelópolis Sur","Carlos A.","carlos@gmail.com","Fachada de color azul con lozetas de barro","2 veces por semana"],[1150,"México","Puebla","Valle del Sol", "Sección Sur","Juan B.","juan@gmail.com","Fachada de color rojo sin lozetas","1 vez por semana"],[917,"México","Puebla","Centro", "Sección Norte","Rodrigo C.","rodri@gmail.com","Fachada de color verde","5 veces por semana"]]
     places_data_r = [[1515,"México","Puebla","Centro", "Sección Sur","Carlos M.","carlosm@gmail.com","Fachada de color verde con lozetas de barro","4 veces por semana"]]
     context = {
         "places_data_d": places_data_d,
         "places_data_r": places_data_r,
-        "countries": countries
+        "data_select": data_select
     }
-    return render(request, 'administration/lugar.html', context)
+    return render(request, 'administration/lugar_domestico.html', context)
+
+def show_lugar_comercio(request):
+    countries = ["México"]
+    zones = ["Puebla","Oaxaca","CDMX"]
+    fracs = ["Angelópolis","Valle del Sol","Centro","Villa Frontera","CU"]
+    subfracs = ["Sección sur","Sección norte","Sección II"]
+    
+    #Sort data
+    countries.sort()
+    zones.sort()
+    fracs.sort()
+    subfracs.sort()
+
+    data_select = [countries,zones,fracs,subfracs]
+
+    places_data_d = [[1515,"México","Puebla","Angelópolis", "Angelópolis Sur","Carlos A.","carlos@gmail.com","Fachada de color azul con lozetas de barro","2 veces por semana"],[1150,"México","Puebla","Valle del Sol", "Sección Sur","Juan B.","juan@gmail.com","Fachada de color rojo sin lozetas","1 vez por semana"],[917,"México","Puebla","Centro", "Sección Norte","Rodrigo C.","rodri@gmail.com","Fachada de color verde","5 veces por semana"]]
+    places_data_r = [[1515,"México","Puebla","Centro", "Sección Sur","Carlos M.","carlosm@gmail.com","Fachada de color verde con lozetas de barro","4 veces por semana"]]
+    context = {
+        "places_data_d": places_data_d,
+        "places_data_r": places_data_r,
+        "data_select": data_select
+    }
+    return render(request, 'administration/lugar_comercio.html', context)
+
+def show_catalogo(request):
+    countries = ["México"]
+    zones = ["Puebla","Oaxaca","CDMX"]
+    fracs = ["Angelópolis","Valle del Sol","Centro","Villa Frontera","CU"]
+    subfracs = ["Sección sur","Sección norte","Sección II"]
+    
+    #Sort data
+    countries.sort()
+    zones.sort()
+    fracs.sort()
+    subfracs.sort()
+
+    data_select = [countries,zones,fracs,subfracs]
+
+    places_data_d = [[1515,"México","Puebla","Angelópolis", "Angelópolis Sur","Carlos A.","carlos@gmail.com","Fachada de color azul con lozetas de barro","2 veces por semana"],[1150,"México","Puebla","Valle del Sol", "Sección Sur","Juan B.","juan@gmail.com","Fachada de color rojo sin lozetas","1 vez por semana"],[917,"México","Puebla","Centro", "Sección Norte","Rodrigo C.","rodri@gmail.com","Fachada de color verde","5 veces por semana"]]
+    places_data_r = [[1515,"México","Puebla","Centro", "Sección Sur","Carlos M.","carlosm@gmail.com","Fachada de color verde con lozetas de barro","4 veces por semana"]]
+    context = {
+        "places_data_d": places_data_d,
+        "places_data_r": places_data_r,
+        "data_select": data_select
+    }
+    return render(request, 'administration/catalogo.html', context)
 
 def show_ruta(request):
+    countries = ["México"]
+    zones = ["Puebla","Oaxaca","CDMX"]
+    fracs = ["Angelópolis","Valle del Sol","Centro","Villa Frontera","CU"]
+    subfracs = ["Sección sur","Sección norte","Sección II"]
+    
+    #Sort data
+    countries.sort()
+    zones.sort()
+    fracs.sort()
+    subfracs.sort()
+
+    data_select = [countries,zones,fracs,subfracs]
+
     current_routes = {
         "Angelopolis Sur": ["casa1","casa2","casa3"],
         "Valle del Sol": ["edi1","edi2","edi3"],
@@ -49,5 +117,19 @@ def show_ruta(request):
         "available_routes": available_routes,
         "current_routes": current_routes,
         "routes_data": routes_data,
+        "data_select": data_select
     }
     return render(request, 'administration/rutas.html', context)
+
+def show_tesoreria(request):
+    current_transfers = [
+        ["19/08/19","Juan Pérez","JuanPerez.pdf","JuanPerez.xml","600.50"],
+        ["19/08/19","Jorge Medrano","JorgeMedrano.pdf","JorgeMedrano.xml","100.50"],
+        ["18/08/19","Arturo Ortiz","ArtutoOrtiz.pdf","ArturoOrtiz.xml","90"],
+        ["15/08/19","Arturo Loya","ArturoLoya.pdf","ArturoLoya.xml","500.75"],
+        ["15/08/19","Pablo Pérez","PabloPerez.pdf","PabloPerez.xml","1,800.50"]
+    ]
+    context = {
+        "current_transfers": current_transfers
+    }
+    return render(request, 'administration/tesoreria.html', context)

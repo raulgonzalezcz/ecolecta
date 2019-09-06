@@ -2,6 +2,35 @@
 
 {% block body_block %}
 <!-- MAIN CONTENT-->
+<!-- Bootstrap 4.1, JQuery 3.1-->
+<style>
+    * {
+      box-sizing: border-box;
+    }
+    
+    /* Create four equal columns that floats next to each other */
+    .column {
+      float: left;
+      margin-top: 10px;
+      margin-left: 1%;
+      width: 10%;
+    }
+    
+    /* Clear floats after the columns */
+    .row:after {
+      content: "";
+      display: table;
+      clear: both;
+    }
+    
+    /* Responsive layout - makes the four columns stack on top of each other instead of next to each other */
+    @media screen and (max-width: 600px) {
+      .column {
+        width: 100%;
+      }
+    }
+    </style>
+
 <div class="main-content">
         <div class="section__content section__content--p30">
             <div class="container-fluid">
@@ -19,8 +48,10 @@
                         </div>
                     </div>
                 </div>
-                <div class="row m-t-25">
-                    <div class="col-sm-6 col-lg-3">
+
+                <!-- Resume-->
+                <div class="row">
+                    <div class="column col-lg-3">
                         <div class="overview-item overview-item--c1">
                             <div class="overview__inner">
                                 <div class="overview-box clearfix">
@@ -38,7 +69,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-sm-6 col-lg-3">
+                    <div class="column col-lg-3">
                         <div class="overview-item overview-item--c1">
                             <div class="overview__inner">
                                 <div class="overview-box clearfix">
@@ -56,7 +87,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-sm-6 col-lg-3">
+                    <div class="column col-lg-3">
                         <div class="overview-item overview-item--c2">
                             <div class="overview__inner">
                                 <div class="overview-box clearfix">
@@ -74,7 +105,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-sm-6 col-lg-3">
+                    <div class="column col-lg-3">
                         <div class="overview-item overview-item--c2">
                             <div class="overview__inner">
                                 <div class="overview-box clearfix">
@@ -92,7 +123,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-sm-6 col-lg-3">
+                    <div class="column col-lg-3">
                         <div class="overview-item overview-item--c3">
                             <div class="overview__inner">
                                 <div class="overview-box clearfix">
@@ -101,7 +132,7 @@
                                     </div>
                                     <div class="text">
                                         <h2>{{total_routes}}</h2>
-                                        <span>rutas completadas</span>
+                                        <span>rutas completadas por mes</span>
                                     </div>
                                 </div>
                                 <div class="overview-chart">
@@ -183,6 +214,7 @@
             </div>
         </div>
     </div>
+
     <!-- END MAIN CONTENT-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script type="text/javascript" src="//cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>

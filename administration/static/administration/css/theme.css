@@ -795,10 +795,6 @@ section {
     transform: translate(-50%, -50%);
 }
 
-.au-input--xl {
-    min-width: 935px;
-}
-
 @media (max-width: 1600px) {
     .au-input--xl {
         min-width: 350px;

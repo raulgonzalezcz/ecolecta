@@ -57,40 +57,6 @@
                             </div>
                         </div>
                 </div>
-
-                <div class="row">
-                        <div class="col-lg-12">
-                            <h2 class="title-1 m-b-25">Rutas completadas</h2>
-                            <div class="table-responsive table--no-card m-b-40">
-                                <table class="table table-borderless table-striped table-earning">
-                                    <thead>
-                                        <tr>
-                                            <th>Fecha</th>
-                                            <th>Nombre de ruta</th>
-                                            <th class="text-right">Ganancia</th>
-                                            <th class="text-right">Ecolugares</th>
-                                            <th>Tiempo recorrido</th>
-                                            <th class="text-right">Kilos de basura orgánica</th>
-                                            <th class="text-right">Kilos de plástico</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        {% for route in routes_data %}
-                                        <tr>
-                                            <td>{{route.0}}</td>
-                                            <td>{{route.2}}</td>
-                                            <td class="text-right">${{route.3}}</td>
-                                            <td >{{route.4}}</td>
-                                            <td >{{route.4}} horas</td>
-                                            <td >{{route.4}}</td>
-                                            <td >{{route.4}}</td>
-                                        </tr>
-                                        {% endfor %}
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                </div>
             
         </div>
     </div>

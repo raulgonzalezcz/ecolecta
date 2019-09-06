@@ -42,8 +42,8 @@
             <div class="header-mobile__bar">
                 <div class="container-fluid">
                     <div class="header-mobile-inner">
-                        <a class="logo" href="index.html">
-                            <img src="images/icon/logo.png" alt="CoolAdmin" />
+                        <a href="{% url 'ecolector:rutas_disponibles' %}">
+                            <img src="images/icon/logo.png" alt="Ecolecta" />
                         </a>
                         <button class="hamburger hamburger--slider" type="button">
                             <span class="hamburger-box">
@@ -56,33 +56,33 @@
             <nav class="navbar-mobile">
                 <div class="container-fluid">
                     <ul class="navbar-mobile__list list-unstyled">
-                        <li class="has-sub">
-                            <a class="js-arrow" href="#">
-                                <i class="fas fa-tachometer-alt"></i>Dashboard</a>
+                        
+                        <li class="has-sub" onclick="getPaging(this.id)" id="ruta">
+                            <a class="js-arrow dropdown-toggle" href="#" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                <i class="fa fa-road"></i>Rutas
+                            </a>
                             <ul class="navbar-mobile-sub__list list-unstyled js-sub-list">
                                 <li>
-                                    <a href="index.html">Dashboard 1</a>
-                                </li>
-                                <!--
-                                <li>
-                                    <a href="index2.html">Dashboard 2</a>
+                                    <a href="{% url 'ecolector:rutas_disponibles' %}">
+                                        <i class="fa fa-question-circle" aria-hidden="true"></i>Disponibles
+                                    </a>
                                 </li>
                                 <li>
-                                    <a href="index3.html">Dashboard 3</a>
+                                    <a href="{% url 'ecolector:rutas_completadas' %}">
+                                        <i class="fa fa-check-circle" aria-hidden="true"></i>Completadas
+                                    </a>
                                 </li>
-                                <li>
-                                    <a href="index4.html">Dashboard 4</a>
-                                </li>
-                                -->
                             </ul>
                         </li>
-                        <li>
-                            <a href="chart.html">
-                                <i class="fas fa-chart-bar"></i>Saldo</a>
+
+
+                        <li onclick="getPaging(this.id)" id="saldo">
+                            <a href="{% url 'ecolector:saldo' %}">
+                                <i class="fa fa-money"></i>Saldo</a>
                         </li>
-                        <li>
-                            <a href="table.html">
-                                <i class="fas fa-table"></i>Rutas</a>
+                        <li onclick="getPaging(this.id)" id="reporte">
+                            <a href="{% url 'ecolector:reportes' %}">
+                                <i class="fa fa-tachometer"></i>Reportes</a>
                         </li>
                         
                     </ul>
@@ -94,23 +94,39 @@
         <!-- MENU SIDEBAR-->
         <aside class="menu-sidebar d-none d-lg-block">
             <div class="logo">
-                <a href="{% url 'ecolector:rutas' %}">
+                <a href="{% url 'ecolector:rutas_disponibles' %}">
                     <img src="images/icon/logo.png" alt="Ecolecta" />
                 </a>
             </div>
             <div class="menu-sidebar__content js-scrollbar1">
                 <nav class="navbar-sidebar">
                     <ul class="list-unstyled navbar__list">
-                        <li class="active has-sub" onclick="getPaging(this.id)" id="ruta">
-                            <a class="js-arrow" href="{% url 'ecolector:rutas' %}">
-                                <i class="fa fa-road"></i>Rutas</a>
+
+                        <li class="has-sub" onclick="getPaging(this.id)" id="ruta">
+                            <a class="js-arrow dropdown-toggle" href="#" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                <i class="fa fa-road"></i>Rutas
+                            </a>
+                            <ul class="navbar-mobile-sub__list list-unstyled js-sub-list">
+                                <li>
+                                    <a href="{% url 'ecolector:rutas_disponibles' %}">
+                                        <i class="fa fa-question-circle" aria-hidden="true"></i>Disponibles
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{% url 'ecolector:rutas_completadas' %}">
+                                        <i class="fa fa-check-circle" aria-hidden="true"></i>Completadas
+                                    </a>
+                                </li>
+                            </ul>
                         </li>
+
+
                         <li onclick="getPaging(this.id)" id="saldo">
                             <a href="{% url 'ecolector:saldo' %}">
                                 <i class="fa fa-money"></i>Saldo</a>
                         </li>
-                        <li onclick="getPaging(this.id)" id="ruta">
-                            <a href="{% url 'ecolector:index' %}">
+                        <li onclick="getPaging(this.id)" id="reporte">
+                            <a href="{% url 'ecolector:reportes' %}">
                                 <i class="fa fa-tachometer"></i>Reportes</a>
                         </li>
                         
@@ -127,12 +143,6 @@
                 <div class="section__content section__content--p30">
                     <div class="container-fluid">
                         <div class="header-wrap">
-                            <form class="form-header" action="" method="POST">
-                                <input class="au-input au-input--xl" type="text" name="search" placeholder="Buscar por palabra clave" />
-                                <button class="au-btn--submit" type="submit">
-                                    <i class="zmdi zmdi-search"></i>
-                                </button>
-                            </form>
                             <div class="header-button">
                                 <div class="noti-wrap">
                                     <div class="noti__item js-item-menu">
@@ -294,20 +304,20 @@
                     </div>
                 </div>
             </header>
-            <!-- HEADER DESKTOP-->
 
             <!-- MAIN CONTENT-->
             {% block body_block %}
             {% endblock %}
             <!-- END MAIN CONTENT-->
 
-            <div class="row">
-                    <div class="col-md-12">
-                        <div class="copyright">
-                            <p>Powered by InnovaTech Solutions MX. Todos los derechos reservados</p>
-                        </div>
+            <!-- FOOTER-->
+            <footer class="footer">
+                <div class="container">
+                    <div class="copyright">
+                      <p>Powered by InnovaTech Solutions MX. Todos los derechos reservados</p>
                     </div>
-            </div>
+                </div>
+            </footer>
             <!-- END PAGE CONTAINER-->
         </div>
 
